@@ -38,7 +38,13 @@ export function SdkDefinition({name, children, categorySupported = []}: Props) {
   );
 }
 
-export function SdkDefinitionTable({children, className}: {children?: React.ReactNode, className?: string}) {
+export function SdkDefinitionTable({
+  children,
+  className,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+}) {
   return (
     <table className={styles['sdk-option-table'] + (className ? ` ${className}` : '')}>
       <tbody>{children}</tbody>
