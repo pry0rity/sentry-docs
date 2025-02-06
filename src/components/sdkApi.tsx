@@ -8,6 +8,7 @@ import {refractor} from 'refractor/lib/core.js';
 
 import {PlatformCategory} from 'sentry-docs/types';
 
+import {Expandable} from './expandable';
 import {SdkDefinition, SdkDefinitionTable} from './sdkDefinition';
 
 interface ParameterDef {
@@ -48,13 +49,13 @@ export function SdkApi({
       <pre className="mt-2 mb-2">{codeToJsx(signature, language)}</pre>
 
       {parameters.length ? (
-        <Fragment>
-          <SdkDefinitionTable>
+        <Expandable title='Parameters'>
+          <SdkDefinitionTable className='bg-white'>
             {parameters.map(param => (
               <ApiParameterDef key={param.name} {...param} />
             ))}
           </SdkDefinitionTable>
-        </Fragment>
+        </Expandable>
       ) : null}
 
       {children}
