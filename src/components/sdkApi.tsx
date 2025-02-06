@@ -6,15 +6,9 @@ import bash from 'refractor/lang/bash.js';
 import json from 'refractor/lang/json.js';
 import {refractor} from 'refractor/lib/core.js';
 
-import {getCurrentPlatformOrGuide} from 'sentry-docs/docTree';
-import {serverContext} from 'sentry-docs/serverContext';
 import {PlatformCategory} from 'sentry-docs/types';
 
-import {CodeBlock} from './codeBlock';
-import {CodeTabs} from './codeTabs';
-import {PlatformCategorySection} from './platformCategorySection';
-import {PlatformSection} from './platformSection';
-import {SdkDefinition, SdkDefinitionTable, SdkDefinitionTableRow} from './sdkDefinition';
+import {SdkDefinition, SdkDefinitionTable} from './sdkDefinition';
 
 interface ParameterDef {
   name: string;
@@ -30,6 +24,7 @@ type Props = {
   signature: string;
   categorySupported?: PlatformCategory[];
   children?: React.ReactNode;
+  language?: string;
 };
 
 refractor.register(bash);
@@ -44,11 +39,13 @@ export function SdkApi({
   children,
   signature,
   parameters = [],
+  // TODO: How to handle this default better?
+  language = 'typescript',
   categorySupported = [],
 }: Props) {
   return (
     <SdkDefinition name={name} categorySupported={categorySupported}>
-      <pre className="mt-2 mb-2">{codeToJsx(signature, 'typescript')}</pre>
+      <pre className="mt-2 mb-2">{codeToJsx(signature, language)}</pre>
 
       {parameters.length ? (
         <Fragment>
