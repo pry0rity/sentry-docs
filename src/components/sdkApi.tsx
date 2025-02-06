@@ -49,8 +49,8 @@ export function SdkApi({
       <pre className="mt-2 mb-2">{codeToJsx(signature, language)}</pre>
 
       {parameters.length ? (
-        <Expandable title='Parameters'>
-          <SdkDefinitionTable className='bg-white'>
+        <Expandable title="Parameters">
+          <SdkDefinitionTable className="bg-white">
             {parameters.map(param => (
               <ApiParameterDef key={param.name} {...param} />
             ))}
