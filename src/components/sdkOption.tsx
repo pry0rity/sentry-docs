@@ -4,7 +4,7 @@ import {PlatformCategory} from 'sentry-docs/types';
 
 import {PlatformCategorySection} from './platformCategorySection';
 import {PlatformSection} from './platformSection';
-import {SdkDefinition, SdkDefinitionTable, SdkDefinitionTableRow} from './sdkDefinition';
+import {SdkDefinition, SdkDefinitionTable} from './sdkDefinition';
 
 type Props = {
   name: string;
@@ -13,7 +13,6 @@ type Props = {
   children?: React.ReactNode;
   defaultValue?: string;
   envVar?: string;
-  group?: string;
 };
 
 export function SdkOption({
@@ -29,30 +28,32 @@ export function SdkOption({
   return (
     <SdkDefinition name={name} categorySupported={categorySupported}>
       <SdkDefinitionTable>
-        {type && <SdkDefinitionTableRow label="Type">{type}</SdkDefinitionTableRow>}
-        {defaultValue && (
-          <SdkDefinitionTableRow label="Default">{defaultValue}</SdkDefinitionTableRow>
-        )}
+        {type && <OptionDefRow label="Type" value={type} />}
+        {defaultValue && <OptionDefRow label="Default" value={defaultValue} />}
 
         <PlatformCategorySection supported={['server', 'serverless']}>
           <PlatformSection notSupported={['javascript.nextjs']}>
-            {envVar && (
-              <SdkDefinitionTableRow label="ENV Variable">{envVar}</SdkDefinitionTableRow>
-            )}
+            {envVar && <OptionDefRow label="ENV Variable" value={envVar} />}
           </PlatformSection>
         </PlatformCategorySection>
 
-        {showBrowserOnly && (
-          <SdkDefinitionTableRow label="Only available on">Client</SdkDefinitionTableRow>
-        )}
-
-        {showServerLikeOnly && (
-          <SdkDefinitionTableRow label="Only available on">Server</SdkDefinitionTableRow>
-        )}
+        {showBrowserOnly && <OptionDefRow label="Only available on" value="Client" />}
+        {showServerLikeOnly && <OptionDefRow label="Only available on" value="Server" />}
       </SdkDefinitionTable>
 
       {children}
     </SdkDefinition>
+  );
+}
+
+function OptionDefRow({label, value}: {label: string; value: string}) {
+  return (
+    <tr>
+      <th>{label}</th>
+      <td>
+        <code>{value}</code>
+      </td>
+    </tr>
   );
 }
 

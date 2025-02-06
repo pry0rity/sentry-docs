@@ -7,6 +7,14 @@
   border-collapse: separate !important;
   border-spacing: 0px;
 
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   & tr th, & tr td {
     border-bottom-width: 0;
     border-right-width: 0;

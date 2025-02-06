@@ -38,27 +38,10 @@ export function SdkDefinition({name, children, categorySupported = []}: Props) {
   );
 }
 
-export function SdkDefinitionTable({children}: {children?: React.ReactNode}) {
+export function SdkDefinitionTable({children, className}: {children?: React.ReactNode, className?: string}) {
   return (
-    <table className={styles['sdk-option-table']}>
+    <table className={styles['sdk-option-table'] + (className ? ` ${className}` : '')}>
       <tbody>{children}</tbody>
     </table>
-  );
-}
-
-export function SdkDefinitionTableRow({
-  label,
-  children,
-}: {
-  label: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <tr>
-      <th>{label}</th>
-      <td>
-        <code>{children}</code>
-      </td>
-    </tr>
   );
 }
